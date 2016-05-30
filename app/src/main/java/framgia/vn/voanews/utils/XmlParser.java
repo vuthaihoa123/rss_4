@@ -1,7 +1,5 @@
 package framgia.vn.voanews.utils;
 
-import android.util.Log;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -37,6 +35,7 @@ public class XmlParser {
     private XmlPullParser mParser;
     private HttpURLConnection mConnection;
 
+
     public XmlPullParser downLoadUrl(String urlstring) throws IOException, XmlPullParserException {
         URL url = new URL(urlstring);
         mConnection = (HttpURLConnection) url.openConnection();
@@ -62,15 +61,15 @@ public class XmlParser {
         String text = "";
 
         try {
-            boolean checktitle= false;
+            boolean checktitle = false;
             event = myParser.getEventType();
             while (event != XmlPullParser.END_DOCUMENT) {
                 String name = myParser.getName();
                 switch (event) {
                     case XmlPullParser.START_TAG:
-                        if(name.equals(TAG_ITEM)){
-                            checktitle=true;
-                            mNews=new News();
+                        if (name.equals(TAG_ITEM)) {
+                            checktitle = true;
+                            mNews = new News();
                             mNews.setCategory(category);
                         }
                         break;
@@ -78,7 +77,7 @@ public class XmlParser {
                         text = myParser.getText().trim();
                         break;
                     case XmlPullParser.END_TAG:
-                        if(checktitle){
+                        if (checktitle) {
                             if (name.equals(TAG_TITLE)) {
                                 mNews.setTitle(text);
                             } else if (name.equals(TAG_PUDATE)) {
@@ -87,13 +86,12 @@ public class XmlParser {
                                 mNews.setDescription(text);
                             } else if (name.equals(TAG_LINK)) {
                                 mNews.setLink(text);
-                                Log.i("title",""+text);
                             } else if (name.equals(TAG_AUTHOR)) {
                                 mNews.setAuthor(text);
                             } else if (name.equals(TAG_ENCLOSURE)) {
                                 mNews.setEnclosure(myParser.getAttributeValue(null, SELECT_IMG));
                             } else if (name.equals(TAG_ITEM)) {
-                                checktitle=false;
+                                checktitle = false;
                                 data.add(mNews);
                             }
                         }
@@ -102,7 +100,7 @@ public class XmlParser {
                 }
                 event = myParser.next();
             }
-        } catch (XmlPullParserException|IOException e) {
+        } catch (XmlPullParserException | IOException e) {
             e.printStackTrace();
         }
         return data;

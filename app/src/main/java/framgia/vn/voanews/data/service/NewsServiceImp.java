@@ -12,9 +12,9 @@ import io.realm.RealmResults;
  * Created by nghicv on 24/05/2016.
  */
 public class NewsServiceImp implements NewsService {
-    private Realm mRealm;
     public static final String TITLE_FIELD = "mTitle";
     public static final String CATEGORY_FIELD = "mCategory";
+    private Realm mRealm;
 
     public NewsServiceImp(Realm realm) {
         mRealm = realm;
@@ -39,8 +39,8 @@ public class NewsServiceImp implements NewsService {
     @Override
     public void insertNews(final List<News> newses, final NewsContract.OnInsertNewsListener onInsertNewsListenner) {
         final List<News> realmNews = new ArrayList<>();
-        for(int i = 0; i < newses.size(); i++) {
-            if(!isExists(newses.get(i)))
+        for (int i = 0; i < newses.size(); i++) {
+            if (!isExists(newses.get(i)))
                 realmNews.add(newses.get(i));
         }
         mRealm.executeTransactionAsync(new Realm.Transaction() {

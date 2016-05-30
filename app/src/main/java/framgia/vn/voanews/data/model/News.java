@@ -1,7 +1,5 @@
 package framgia.vn.voanews.data.model;
 
-import android.util.Log;
-
 import java.util.Date;
 
 import io.realm.RealmObject;
@@ -105,11 +103,11 @@ public class News extends RealmObject {
         return mIsViewed;
     }
 
-    public void setAuthor(String author) {
-        mAuthor = author;
-    }
-
     public String getAuthor() {
         return mAuthor;
+    }
+
+    public void setAuthor(String author) {
+        mAuthor = author;
     }
 }

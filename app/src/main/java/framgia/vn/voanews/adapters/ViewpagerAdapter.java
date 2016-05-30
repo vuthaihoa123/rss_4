@@ -11,30 +11,31 @@ import java.util.List;
  * Created by toannguyen201194 on 23/05/2016.
  */
 public class ViewpagerAdapter extends FragmentPagerAdapter {
-	private final List<Fragment> mFrgList = new ArrayList<>();
-	private final List<String> mFrgStrList = new ArrayList<>();
 
-	public ViewpagerAdapter(FragmentManager fm) {
-		super(fm);
-	}
+    private final List<Fragment> mFrgList = new ArrayList<>();
+    private final List<String> mFrgStrList = new ArrayList<>();
 
-	@Override
-	public Fragment getItem(int position) {
-		return mFrgList.get(position);
-	}
+    public ViewpagerAdapter(FragmentManager fm) {
+        super(fm);
+    }
 
-	@Override
-	public int getCount() {
-		return mFrgList.size();
-	}
+    @Override
+    public Fragment getItem(int position) {
+        return mFrgList.get(position);
+    }
 
-	@Override
-	public CharSequence getPageTitle(int position) {
-		return mFrgStrList.get(position);
-	}
+    @Override
+    public int getCount() {
+        return mFrgList.size();
+    }
 
-	public void addFragment(Fragment fragment, String title) {
-		mFrgList.add(fragment);
-		mFrgStrList.add(title);
-	}
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return mFrgStrList.get(position);
+    }
+
+    public void addFragment(Fragment fragment, String title) {
+        mFrgList.add(fragment);
+        mFrgStrList.add(title);
+    }
 }
